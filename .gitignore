@@ -1,0 +1,30 @@
+# Виртуальное окружение
+venv/
+env/
+.env/
+.venv/
+
+# Файлы с секретами и переменными окружения
+.env
+
+# Базы данных
+*.db
+*.sqlite3
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Папка с данными (вся папка data, т.к. там база данных и Obsidian)
+/data/
+
+# Логи
+*.log
+
+# Системные файлы Windows
+Thumbs.db
+Desktop.ini
+
+# Файлы IDE (VS Code и PyCharm)
+.vscode/
+.idea/
