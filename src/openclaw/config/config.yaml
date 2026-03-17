@@ -1,0 +1,22 @@
+# OpenClaw как API-сервер (без провайдера)
+gateway:
+  port: 18789
+  host: "0.0.0.0"
+  api_enabled: true
+  api_key: "${OPENCLAW_API_KEY}"  # опционально
+
+agents:
+  defaults:
+    model:
+      primary: "gigachat"
+
+  # Можно добавить специфичные настройки для VK
+  vk:
+    model:
+      primary: "gigachat"
+    prompt: "Вы ассистент тренера в VK"
+
+# Хранилище сессий
+storage:
+  type: "file"
+  path: "/home/node/workspace/sessions"

@@ -1,0 +1,22 @@
+# Автоматически нормализовать окончания строк
+* text=auto
+
+# Явно указать для特定 файлов
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+.env.example text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.dockerignore text eol=lf
+Dockerfile text eol=lf
+
+# Бинарные файлы (не трогать)
+*.jpg binary
+*.png binary
+*.ico binary
+*.db binary
+*.sqlite binary

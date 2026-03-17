@@ -1,0 +1,50 @@
+# Виртуальное окружение
+venv/
+env/
+ENV/
+
+# Файлы с секретами
+.env
+*.secret.json
+*.secret
+credentials.json
+*.token.json
+google_fit_token.json
+google_client_secret.json
+
+# Базы данных
+*.db
+*.sqlite
+*.sqlite3
+data/sqlite/
+data/*.db
+
+# Логи
+*.log
+data/logs/
+logs/
+
+# Кэш Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# OpenClaw workspace (содержит временные файлы)
+src/openclaw/config/workspace/
+src/openclaw/config/canvas/
+src/openclaw/config/logs/
+src/openclaw/config/*.json
+!src/openclaw/config/config.yaml

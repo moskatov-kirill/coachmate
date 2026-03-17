@@ -1,0 +1,64 @@
+services:
+  sidecar:
+    build:
+      context: .
+      dockerfile: src/sidecar/Dockerfile
+    container_name: coachmate-sidecar
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+      - ./src/sidecar:/app
+      - ./src/bot/credentials:/app/credentials
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - coachmate-network
+
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: coachmate-openclaw
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:18789:18789"
+    env_file:
+      - .env
+    volumes:
+      - ./src/openclaw/config:/home/node/.openclaw
+      - ./src/openclaw/workspace:/home/node/workspace
+    depends_on:
+      - sidecar
+    networks:
+      - coachmate-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: coachmate-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/webpanel:/usr/share/nginx/html
+    networks:
+      - coachmate-network
+
+  vk-bot:
+    build:
+      context: .
+      dockerfile: src/vk_bot/Dockerfile
+    container_name: coachmate-vk-bot
+    env_file:
+      - .env
+    volumes:
+      - ./src/vk_bot:/app
+      - ./data:/data
+    depends_on:
+      - openclaw
+      - sidecar
+    networks:
+      - coachmate-network
+    restart: unless-stopped
+
+networks:
+  coachmate-network:
+    driver: bridge
